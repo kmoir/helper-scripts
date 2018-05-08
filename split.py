@@ -18,12 +18,13 @@ def split(file_):
         match_object = re.match(r"^\s*\w+ \d+, \d\d\d\d\s*([^\:]+)", page_text)
         if match_object:
             report_name = match_object.group(1).lower().replace(' ', '_')
+            report_name = report_name.replace('dear_','')
             output = PdfFileWriter()
-            outputStream = file("%s_%s.pdf" % (new_file_prefix, report_name), "wb")
+            outputStream = open("%s_%s.pdf" % (new_file_prefix, report_name), "wb")
             output.addPage(current_page)
             output.write(outputStream)
         else:
-            print "Unable to parse report name for page %d!" % i
+            print ("Unable to parse report name for page %d!") % i
 
 
 if __name__ == '__main__':
